@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextField extends StatefulWidget {
   final String? hintText;
-  final bool obscureText ;
+  late bool obscureText ;
   final TextEditingController? controller ;
   MyTextField({
     super.key,
@@ -13,12 +13,17 @@ class MyTextField extends StatelessWidget {
   });
 
   @override
+  State<MyTextField> createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends State<MyTextField> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: TextField(
-        obscureText: obscureText,
-        controller: controller,
+        obscureText: widget.obscureText,
+        controller: widget.controller,
         decoration: InputDecoration(
           enabledBorder:  OutlineInputBorder(
             borderSide: BorderSide(color: Theme.of(context).colorScheme.tertiary),
@@ -26,9 +31,14 @@ class MyTextField extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
           ),
+          suffixIcon: IconButton(onPressed: (){
+            setState(() {
+             widget.obscureText = !widget.obscureText;
+            });
+          }, icon: Icon(widget.obscureText? Icons.visibility_off : Icons.visibility),) ,
           fillColor: Colors.grey.shade200,
           filled: true,
-          hintText: hintText,
+          hintText: widget.hintText,
           hintStyle: TextStyle(color: Colors.grey.shade500),
         ),
       ),

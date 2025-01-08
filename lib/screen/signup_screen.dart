@@ -1,3 +1,4 @@
+import 'package:chat_with_firebase/services/auth/auth_services.dart';
 import 'package:chat_with_firebase/compnent/my_button.dart';
 import 'package:chat_with_firebase/compnent/my_textfield.dart';
 import 'package:flutter/foundation.dart';
@@ -6,11 +7,40 @@ import 'package:flutter/material.dart';
 class SignUpScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmpasswordController = TextEditingController();
+  final TextEditingController _confirmpasswordController =
+      TextEditingController();
   void Function()? onTap;
-   SignUpScreen({super.key, required this.onTap});
+  SignUpScreen({super.key, required this.onTap});
 
-void signUp(){}
+  void signUp(BuildContext context) {
+    final _auth = AuthService();
+
+    if (_passwordController.text == _confirmpasswordController.text) {
+      try {
+        _auth.sigUpWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text(e.toString()),
+              );
+            });
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text("password don't match"),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +73,7 @@ void signUp(){}
               controller: _confirmpasswordController,
               obscureText: true,
             ),
-            MyButton(text: "Login", onTap: signUp),
+            MyButton(text: "Login", onTap: () => signUp(context)),
             Row(
               children: [
                 Text("Already have an account?"),
@@ -61,6 +91,5 @@ void signUp(){}
         ),
       ),
     );
-  
   }
 }

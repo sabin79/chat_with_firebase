@@ -1,3 +1,4 @@
+import 'package:chat_with_firebase/services/auth/auth_services.dart';
 import 'package:chat_with_firebase/compnent/my_button.dart';
 import 'package:chat_with_firebase/compnent/my_textfield.dart';
 import 'package:flutter/foundation.dart';
@@ -6,10 +7,26 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-   void Function()? onTap ;
+  void Function()? onTap;
   LoginScreen({super.key, required this.onTap});
 
-  void login() {}
+  void login(BuildContext context) async {
+    // auth service f
+    final authService = AuthService();
+    // try  login
+    try {
+      await authService.sigInWithEmailAndPassword(
+          _emailController.text, _passwordController.text);
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (ctx) {
+            return AlertDialog(
+              content: Text(e.toString()),
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +54,7 @@ class LoginScreen extends StatelessWidget {
               controller: _passwordController,
               obscureText: true,
             ),
-            MyButton(text: "Login", onTap: login),
+            MyButton(text: "Login", onTap: () => login(context)),
             Row(
               children: [
                 Text("Don't have an account?"),
@@ -55,6 +72,5 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-  
   }
 }

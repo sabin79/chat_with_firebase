@@ -1,0 +1,44 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "fir-chatapp-a5025",
+          "appId": "1:286192431576:android:9019d1dcfa2d8e08c7c2ad",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "fir-chatapp-a5025",
+          "appId": "1:286192431576:ios:50921aa6bc7533adc7c2ad",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "fir-chatapp-a5025",
+          "appId": "1:286192431576:ios:50921aa6bc7533adc7c2ad",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "fir-chatapp-a5025",
+          "configurations": {
+            "android": "1:286192431576:android:9019d1dcfa2d8e08c7c2ad",
+            "ios": "1:286192431576:ios:50921aa6bc7533adc7c2ad",
+            "macos": "1:286192431576:ios:50921aa6bc7533adc7c2ad",
+            "web": "1:286192431576:web:d94379bfb67cc3f1c7c2ad",
+            "windows": "1:286192431576:web:b0bc915f14bab170c7c2ad"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "singleProjectMode": true
+  }
+}
