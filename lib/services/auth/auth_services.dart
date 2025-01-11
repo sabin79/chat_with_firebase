@@ -12,7 +12,7 @@ class AuthService {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      _fireStore.collection("Users").doc(userCredential.user!.uid).set({
+      _fireStore.collection("users").doc(userCredential.user!.uid).set({
         "uid": userCredential.user!.uid,
         "email": email,
       });
@@ -29,15 +29,19 @@ class AuthService {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      try {
-        await _fireStore.collection("users").doc(userCredential.user!.uid).set({
-          "uid": userCredential.user!.uid,
-          "email": email,
-        });
-        print("User data successfully written to Firestore.");
-      } catch (e) {
-        print("Error writing user data to Firestore: $e");
-      }
+      // try {
+      //   await _fireStore.collection("users").doc(userCredential.user!.uid).set({
+      //     "uid": userCredential.user!.uid,
+      //     "email": email,
+      //   });
+      //   print("User data successfully written to Firestore.");
+      // } catch (e) {
+      //   print("Error writing user data to Firestore: $e");
+      // }
+      _fireStore.collection("users").doc(userCredential.user!.uid).set({
+        "uid": userCredential.user!.uid,
+        "email": email,
+      });
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);

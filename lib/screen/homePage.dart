@@ -54,14 +54,17 @@ class HomePage extends StatelessWidget {
   Widget _builduserListItem(
       Map<String, dynamic> userData, BuildContext context) {
     return UserTile(
-        text: userData['email'],
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatPage(
-                        receivedEmail: userData['email'],
-                      )));
-        });
+      text: userData['email'],
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatPage(
+              receivedEmail: userData['email'],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
