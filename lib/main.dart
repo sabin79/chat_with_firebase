@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  FirebaseFirestore.instance.useFirestoreEmulator('10.0.2.2', 80);
+  // FirebaseFirestore.instance.useFirestoreEmulator('10.0.2.2', 80);
 
   runApp(const MyApp());
 }
