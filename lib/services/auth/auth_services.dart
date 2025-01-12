@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,13 +14,23 @@ class AuthService {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      _fireStore.collection("users").doc(userCredential.user!.uid).set({
+      log('User signed in: ${userCredential.user?.uid}');
+
+      await _fireStore.collection("users").doc(userCredential.user!.uid).set({
         "uid": userCredential.user!.uid,
         "email": email,
+      }).catchError((error) {
+        log("Firestore write error: $error");
       });
+      log("User data added to Firestore for UID: ${userCredential.user!.uid}");
+
       return userCredential;
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.code);
+    } on FirebaseAuthException catch (authError) {
+      log("FirebaseAuthException: ${authError.message}");
+      throw Exception(authError.code);
+    } catch (generalError) {
+      log("An unexpected error occurred: $generalError");
+      throw Exception("Unexpected error occurred");
     }
   }
 
@@ -38,7 +50,7 @@ class AuthService {
       // } catch (e) {
       //   print("Error writing user data to Firestore: $e");
       // }
-      _fireStore.collection("users").doc(userCredential.user!.uid).set({
+      await _fireStore.collection("users").doc(userCredential.user!.uid).set({
         "uid": userCredential.user!.uid,
         "email": email,
       });

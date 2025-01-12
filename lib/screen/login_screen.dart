@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
   void Function()? onTap;
   LoginScreen({super.key, required this.onTap});
 
-  void login(BuildContext context) async {
+  Future<void> login(BuildContext context) async {
     // auth service f
     final authService = AuthService();
     // try  login
@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
               controller: _passwordController,
               obscureText: true,
             ),
-            MyButton(text: "Login", onTap: () => login(context)),
+            MyButton(text: "Login", onTap: () async => await login(context)),
             Row(
               children: [
                 Text("Don't have an account?"),
