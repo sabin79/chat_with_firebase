@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   //
-  final ChatServices _chatServices = ChatServices();
+  final ChatService _chatServices = ChatService();
   final AuthService _auth = AuthService();
 
   @override
@@ -61,6 +61,7 @@ class HomePage extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => ChatPage(
               receivedEmail: userData['email'],
+              receivedId: userData['uid'],
             ),
           ),
         );
