@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: Text("Home Page"),
         centerTitle: true,
       ),

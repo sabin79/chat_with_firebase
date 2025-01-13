@@ -19,19 +19,19 @@ class ChatService {
   }
 
   Future<void> sendMessage(String receiverId, String message) async {
-    final userUid = _auth.currentUser!.uid!;
+    final userId = _auth.currentUser!.uid;
     final userEmail = _auth.currentUser!.email!;
     final timestamp = Timestamp.now();
 
     Message newMessage = Message(
-      senderID: userUid,
-      receiverID: receiverId,
+      senderID: userId,
       SenderEmail: userEmail,
+      receiverID: receiverId,
       message: message,
       timestamp: timestamp,
     );
 
-    List<String> ids = [userUid, receiverId];
+    List<String> ids = [userId, receiverId];
     ids.sort();
     String chatId = ids.join("_");
 
@@ -41,21 +41,18 @@ class ChatService {
         .doc(chatId)
         .collection("messages")
         .add(newMessage.toMap());
-
-
-// get message
-    Stream<QuerySnapshot> getMessages(String UserId, otherUserId) {
-      List<String> ids = [UserId, otherUserId];
-      ids.sort();
-      String chatId = ids.join("_");
-      return _firestore
-          .collection("chats")
-          .doc(chatId)
-          .collection("messages")
-          .orderBy("timestamp", descending: false)
-          .snapshots();
-    }
   }
 
-  
+// get message
+  Stream<QuerySnapshot> getMessages(String UserId, otherUserId) {
+    List<String> ids = [UserId, otherUserId];
+    ids.sort();
+    String chatId = ids.join("_");
+    return _firestore
+        .collection("chats")
+        .doc(chatId)
+        .collection("messages")
+        .orderBy("timestamp", descending: false)
+        .snapshots();
+  }
 }
