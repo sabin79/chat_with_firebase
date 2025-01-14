@@ -57,6 +57,7 @@ class AuthService {
       await _fireStore.collection("users").doc(userCredential.user!.uid).set({
         "uid": userCredential.user!.uid,
         "email": email,
+        
       });
       return userCredential;
     } on FirebaseAuthException catch (e) {

@@ -1,3 +1,4 @@
+import 'package:chat_with_firebase/screen/edit_profile.dart';
 import 'package:chat_with_firebase/services/auth/auth_services.dart';
 import 'package:chat_with_firebase/screen/setting_page.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,24 @@ class MyDrawerWidget extends StatelessWidget {
                   Icons.message,
                   size: 65,
                   color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 25),
+                child: ListTile(
+                  title: Text("E D I T   P R O F I L E"),
+                  leading: Icon(
+                    Icons.edit,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return EditProfilePage();
+                    }));
+                  },
                 ),
               ),
               Padding(

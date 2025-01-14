@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmpasswordController =
       TextEditingController();
@@ -20,7 +21,10 @@ class SignUpScreen extends StatelessWidget {
         _auth.sigUpWithEmailAndPassword(
           _emailController.text,
           _passwordController.text,
+        
         );
+        
+
       } catch (e) {
         showDialog(
             context: context,
@@ -58,6 +62,10 @@ class SignUpScreen extends StatelessWidget {
             Text(
               "Welcome  to ",
               style: Theme.of(context).textTheme.titleMedium,
+            ),
+            MyTextField(
+              hintText: 'Enter your Name',
+              controller: _nameController,
             ),
             MyTextField(
               hintText: 'Enter your Email',

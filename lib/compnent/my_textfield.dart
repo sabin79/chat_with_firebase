@@ -9,7 +9,7 @@ class MyTextField extends StatefulWidget {
       {super.key,
       required this.hintText,
       required this.controller,
-      this.obscureText = true});
+      this.obscureText = false});
 
   @override
   State<MyTextField> createState() => _MyTextFieldState();
@@ -21,7 +21,7 @@ class _MyTextFieldState extends State<MyTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: TextField(
-        obscureText: widget.obscureText,
+        obscureText: widget.obscureText ? true : false,
         controller: widget.controller,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
