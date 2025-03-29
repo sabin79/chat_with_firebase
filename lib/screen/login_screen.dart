@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:chat_with_firebase/services/auth/auth_services.dart';
 import 'package:chat_with_firebase/compnent/my_button.dart';
 import 'package:chat_with_firebase/compnent/my_textfield.dart';
@@ -33,42 +35,65 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.message,
-              size: 65,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            Text(
-              "Welcome bak to Flutter",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            MyTextField(
-              hintText: 'Enter your Email',
-              controller: _emailController,
-            ),
-            MyTextField(
-              hintText: "Enter your Password",
-              controller: _passwordController,
-              obscureText: true,
-            ),
-            MyButton(text: "Login", onTap: () async => await login(context)),
-            Row(
-              children: [
-                Text("Don't have an account?"),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Text(
-                    "Register Here",
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.bold),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.message,
+                size: 65,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                "Welcome  to Login ",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              MyTextField(
+                hintText: 'Enter your Email',
+                controller: _emailController,
+              ),
+              MyTextField(
+                hintText: "Enter your Password",
+                controller: _passwordController,
+                showSuffixIcon: true,
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              MyButton(text: "Login", onTap: () async => await login(context)),
+              SizedBox(
+                height: 16,
+              ),
+              Row(
+                children: [
+                  Text("Don't have an account?"),
+                  SizedBox(
+                    width: 5,
                   ),
-                )
-              ],
-            )
-          ],
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Text(
+                      "Register Here",
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

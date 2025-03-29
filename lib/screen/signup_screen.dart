@@ -21,10 +21,7 @@ class SignUpScreen extends StatelessWidget {
         _auth.sigUpWithEmailAndPassword(
           _emailController.text,
           _passwordController.text,
-        
         );
-        
-
       } catch (e) {
         showDialog(
             context: context,
@@ -51,51 +48,70 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.message,
-              size: 65,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            Text(
-              "Welcome  to ",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            MyTextField(
-              hintText: 'Enter your Name',
-              controller: _nameController,
-            ),
-            MyTextField(
-              hintText: 'Enter your Email',
-              controller: _emailController,
-            ),
-            MyTextField(
-              hintText: "Enter your Password",
-              controller: _passwordController,
-              obscureText: true,
-            ),
-            MyTextField(
-              hintText: "Enter your Password",
-              controller: _confirmpasswordController,
-              obscureText: true,
-            ),
-            MyButton(text: "Login", onTap: () => signUp(context)),
-            Row(
-              children: [
-                Text("Already have an account?"),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Text(
-                    "login Here",
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.bold),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.message,
+                size: 65,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              Text(
+                "Welcome  to ",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              SizedBox(height: 16),
+              MyTextField(
+                hintText: 'Enter your Name',
+                controller: _nameController,
+              ),
+              MyTextField(
+                hintText: 'Enter your Email',
+                controller: _emailController,
+              ),
+              MyTextField(
+                hintText: "Enter your Password",
+                controller: _passwordController,
+                showSuffixIcon: true,
+                obscureText: true,
+              ),
+              MyTextField(
+                hintText: "Re-Enter your Password",
+                controller: _confirmpasswordController,
+                showSuffixIcon: true,
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              MyButton(text: "Sign Up", onTap: () => signUp(context)),
+              SizedBox(
+                height: 16,
+              ),
+              Row(
+                children: [
+                  Text("Already have an account?"),
+                  SizedBox(
+                    width: 5,
                   ),
-                )
-              ],
-            )
-          ],
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Text(
+                      "login Here",
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
